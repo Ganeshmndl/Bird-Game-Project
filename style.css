@@ -1,0 +1,238 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #70c5ce;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#start-screen,
+#game-over-screen {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 20;
+}
+
+#game-over-screen h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+#game-over-screen button {
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #4caf50; /* Green background */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#game-over-screen button:hover {
+  background-color: #45a049; /* Darker green on hover */
+}
+
+/* Hack Button */
+#hack-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 30px; /* Large size */
+  height: 30px; /* Large size */
+  border-radius: 50%; /* Circular button */
+  background-color: #ffcc00; /* Yellow color */
+  border: 3px solid #000; /* Thicker border */
+  cursor: pointer;
+  z-index: 20; /* Ensure it's above other elements */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px; /* Large font size */
+  color: #000;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Strong shadow for visibility */
+}
+
+#hack-btn:active {
+  background-color: #e6b800; /* Darker yellow on click */
+}
+
+/* Hack Mode Active */
+#hack-btn.active {
+  background-color: #00cc00; /* Green color when hack mode is active */
+}
+
+/* Game Section */
+.game-section {
+  width: 90%; /* Adjust based on your preference */
+  max-width: 400px; /* Limit maximum width */
+  height: 70vh; /* Adjust based on your preference */
+  background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+  border-radius: 10px; /* Rounded corners */
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 20px; /* Space between game and buttons */
+}
+
+.game-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-image: url("background.png");
+  background-size: cover;
+  overflow: hidden;
+}
+
+#bird {
+  position: absolute;
+  top: 50%;
+  left: 50px;
+  width: 40px;
+  height: 40px;
+  background-image: url("bird.png");
+  background-size: cover;
+  transition: transform 0.2s ease;
+}
+
+#bird.rotate-up {
+  transform: rotate(-20deg);
+}
+
+.pipe {
+  position: absolute;
+  width: 60px; /* Adjust based on your preference */
+  background-color: green; /* Default color */
+  border-radius: 10px; /* Rounded edges for pipes */
+}
+
+#score {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  color: white;
+  z-index: 10;
+}
+
+.ground {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background-image: url("ground.png");
+  background-size: cover;
+  z-index: 5;
+}
+
+/* Mobile Controls */
+.mobile-controls {
+  display: flex;
+  justify-content: space-between;
+  width: 90%; /* Match game section width */
+  max-width: 400px; /* Match game section max-width */
+  padding: 0 10px;
+}
+
+.mobile-controls button {
+  padding: 15px 25px;
+  font-size: 18px;
+  background-color: #008cba; /* Blue background */
+  color: white;
+  border: none;
+  border-radius: 10px; /* Rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex: 1; /* Equal width for both buttons */
+  margin: 0 5px; /* Space between buttons */
+}
+
+.mobile-controls button:hover {
+  background-color: #007b9e; /* Darker blue on hover */
+}
+
+/* Mobile-specific styles */
+@media (max-width: 600px) {
+  .game-section {
+    height: 60vh; /* Adjust height for smaller screens */
+  }
+
+  #bird {
+    width: 30px; /* Smaller bird for mobile */
+    height: 30px;
+  }
+
+  .pipe {
+    width: 50px; /* Smaller pipes for mobile */
+  }
+
+  #score {
+    font-size: 20px; /* Smaller score text for mobile */
+  }
+
+  .mobile-controls button {
+    padding: 20px 30px; /* Larger buttons for mobile */
+    font-size: 20px;
+  }
+  /* Fruits */
+
+  .fruit {
+    position: absolute;
+    background-size: cover;
+    z-index: 5;
+  }
+
+  .fruit.small {
+    width: 20px;
+    height: 20px;
+    background-image: url("small-fruit.png"); /* Add your small fruit image */
+  }
+
+  .fruit.large {
+    width: 30px;
+    height: 30px;
+    background-image: url("large-fruit.png"); /* Add your large fruit image */
+    animation: zoom 1.5s ease-in-out infinite; /* Add zoom animation */
+  }
+
+  /* Zoom animation for large fruits */
+  @keyframes zoom {
+    0%,
+    100% {
+      transform: scale(1); /* Normal size */
+    }
+    50% {
+      transform: scale(1.2); /* Slightly larger */
+    }
+  }
+  /* Mobile Controls */
+  .mobile-controls button {
+    padding: 15px 25px;
+    font-size: 18px;
+    background-color: #008cba; /* Blue background */
+    color: white;
+    border: none;
+    border-radius: 10px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    flex: 1; /* Equal width for both buttons */
+    margin: 0 5px; /* Space between buttons */
+    user-select: none; /* Prevent text selection */
+  }
+
+  .mobile-controls button:hover {
+    background-color: #007b9e; /* Darker blue on hover */
+  }
+}
