@@ -3,40 +3,48 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flappy Bird Game</title>
+    <title>Flappy Bird Deluxe</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="preload" href="assets/bird.png" as="image" />
+    <link rel="preload" href="assets/background.png" as="image" />
+    <link rel="preload" href="assets/ground.png" as="image" />
   </head>
   <body>
+    <!-- Update start screen text -->
     <div id="start-screen">
       <h1>Flappy Bird</h1>
-      <p>Tap Any Button to Start</p>
+      <p>Press Any Button to Start</p>
+      <!-- Changed text -->
+      <div class="high-score">High Score: <span id="high-score">0</span></div>
     </div>
 
-    <!-- Hack Button -->
-    <button id="hack-btn"></button>
+    <button id="hack-btn" aria-label="Enable cheats">★</button>
 
-    <div class="game-section">
+    <div class="game-section" role="main">
       <div class="game-container">
         <div id="bird"></div>
         <div id="score">Score: 0</div>
-        <div class="pipes-container">
-          <!-- Pipes will be generated here dynamically -->
-        </div>
+        <div class="particles-container"></div>
+        <div class="pipes-container"></div>
         <div class="ground"></div>
       </div>
     </div>
 
     <div id="game-over-screen" style="display: none">
       <h1>Game Over</h1>
-      <p>Your Score: <span id="final-score"></span></p>
-      <button onclick="startGame()">Play Again</button>
+      <p>Your Score: <span id="final-score">0</span></p>
+      <p>High Score: <span id="final-high-score">0</span></p>
+      <button id="restart-btn">Play Again</button>
     </div>
 
-    <!-- Mobile Buttons -->
     <div class="mobile-controls">
-      <button id="jump-btn">Jump</button>
-      <button id="fall-btn">Fall Faster</button>
+      <button id="jump-btn" aria-label="Jump">Jump</button>
+      <button id="fall-btn" aria-label="Fall Faster">Fall Faster</button>
     </div>
+
+    <audio id="jump-sound" src="assets/jump.wav" preload="auto"></audio>
+    <audio id="score-sound" src="assets/score.wav" preload="auto"></audio>
+    <audio id="gameover-sound" src="assets/gameover.wav" preload="auto"></audio>
 
     <script src="script.js"></script>
   </body>

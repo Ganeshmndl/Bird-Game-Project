@@ -1,3 +1,4 @@
+/* Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -5,7 +6,7 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Arial", sans-serif;
   background-color: #70c5ce;
   display: flex;
   flex-direction: column;
@@ -13,8 +14,10 @@ body {
   align-items: center;
   height: 100vh;
   overflow: hidden;
+  touch-action: manipulation;
 }
 
+/* Game Screens */
 #start-screen,
 #game-over-screen {
   position: absolute;
@@ -24,26 +27,50 @@ body {
   text-align: center;
   color: white;
   z-index: 20;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+#start-screen h1,
 #game-over-screen h1 {
-  font-size: 36px;
-  margin-bottom: 20px;
+  font-size: 3rem;
+  margin-bottom: 1rem;
 }
 
-#game-over-screen button {
-  padding: 10px 20px;
-  font-size: 18px;
-  background-color: #4caf50; /* Green background */
+#start-screen p,
+#game-over-screen p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.high-score {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+/* Game Over Screen */
+#game-over-screen button,
+#restart-btn {
+  padding: 12px 24px;
+  font-size: 1.2rem;
+  background-color: #4caf50;
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-#game-over-screen button:hover {
-  background-color: #45a049; /* Darker green on hover */
+#game-over-screen button:hover,
+#restart-btn:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+#game-over-screen button:active,
+#restart-btn:active {
+  transform: translateY(0);
 }
 
 /* Hack Button */
@@ -51,188 +78,228 @@ body {
   position: absolute;
   top: 20px;
   left: 20px;
-  width: 30px; /* Large size */
-  height: 30px; /* Large size */
-  border-radius: 50%; /* Circular button */
-  background-color: #ffcc00; /* Yellow color */
-  border: 3px solid #000; /* Thicker border */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ffd700;
+  border: 3px solid #000;
   cursor: pointer;
-  z-index: 20; /* Ensure it's above other elements */
+  z-index: 20;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 36px; /* Large font size */
+  font-size: 1.5rem;
   color: #000;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7); /* Strong shadow for visibility */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
+  transition: all 0.3s ease;
+  user-select: none;
 }
 
-#hack-btn:active {
-  background-color: #e6b800; /* Darker yellow on click */
+#hack-btn:hover {
+  transform: scale(1.1);
 }
 
-/* Hack Mode Active */
 #hack-btn.active {
-  background-color: #00cc00; /* Green color when hack mode is active */
+  background-color: #00ff00;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.7);
 }
 
 /* Game Section */
 .game-section {
-  width: 90%; /* Adjust based on your preference */
-  max-width: 400px; /* Limit maximum width */
-  height: 70vh; /* Adjust based on your preference */
-  background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
-  border-radius: 10px; /* Rounded corners */
+  width: 90%;
+  max-width: 400px;
+  height: 70vh;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
   overflow: hidden;
   position: relative;
-  margin-bottom: 20px; /* Space between game and buttons */
+  margin-bottom: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .game-container {
   position: relative;
   width: 100%;
   height: 100%;
-  background-image: url("background.png");
+  background-image: url("assets/background.png");
   background-size: cover;
   overflow: hidden;
 }
 
+/* Bird */
 #bird {
   position: absolute;
   top: 50%;
   left: 50px;
   width: 40px;
   height: 40px;
-  background-image: url("bird.png");
+  background-image: url("assets/bird.png");
   background-size: cover;
   transition: transform 0.2s ease;
+  will-change: transform;
+  filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.4));
+  z-index: 10;
 }
 
 #bird.rotate-up {
   transform: rotate(-20deg);
 }
 
+/* Pipes */
 .pipe {
   position: absolute;
-  width: 60px; /* Adjust based on your preference */
-  background-color: green; /* Default color */
-  border-radius: 10px; /* Rounded edges for pipes */
+  width: 80px;
+  background: linear-gradient(to right, #4caf50, #2e7d32);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  will-change: transform;
+  z-index: 5;
 }
 
+.pipe-top {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.pipe-bottom {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+/* Score */
 #score {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 24px;
+  top: 20px;
+  left: 20px;
+  font-size: 1.5rem;
   color: white;
   z-index: 10;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+  font-weight: bold;
 }
 
+/* Ground */
 .ground {
   position: absolute;
   bottom: 0;
   width: 100%;
   height: 50px;
-  background-image: url("ground.png");
+  background-image: url("assets/ground.png");
   background-size: cover;
-  z-index: 5;
+  z-index: 8;
+}
+
+/* Fruits */
+.fruit {
+  position: absolute;
+  background-size: cover;
+  z-index: 7;
+  will-change: transform;
+}
+
+.fruit.small {
+  width: 20px;
+  height: 20px;
+  background-image: url("assets/small-fruit.png");
+}
+
+.fruit.large {
+  width: 30px;
+  height: 30px;
+  background-image: url("assets/large-fruit.png");
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* Particles */
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 15;
 }
 
 /* Mobile Controls */
 .mobile-controls {
-  display: flex;
+  display: none; /* Hidden by default */
   justify-content: space-between;
-  width: 90%; /* Match game section width */
-  max-width: 400px; /* Match game section max-width */
+  width: 90%;
+  max-width: 400px;
   padding: 0 10px;
+  gap: 10px;
 }
 
 .mobile-controls button {
-  padding: 15px 25px;
-  font-size: 18px;
-  background-color: #008cba; /* Blue background */
+  padding: 20px 0;
+  font-size: 1.2rem;
+  background-color: #008cba;
   color: white;
   border: none;
-  border-radius: 10px; /* Rounded corners */
+  border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  flex: 1; /* Equal width for both buttons */
-  margin: 0 5px; /* Space between buttons */
+  transition: all 0.3s ease;
+  flex: 1;
+  user-select: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.mobile-controls button:hover {
-  background-color: #007b9e; /* Darker blue on hover */
+.mobile-controls button:active {
+  background-color: #007b9e;
+  transform: translateY(2px);
 }
 
-/* Mobile-specific styles */
-@media (max-width: 600px) {
+/* Responsive Design */
+@media (max-width: 768px) {
   .game-section {
-    height: 60vh; /* Adjust height for smaller screens */
+    height: 60vh;
   }
 
   #bird {
-    width: 30px; /* Smaller bird for mobile */
+    width: 35px;
+    height: 35px;
+  }
+
+  .pipe {
+    width: 70px;
+  }
+
+  .mobile-controls {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  #start-screen h1,
+  #game-over-screen h1 {
+    font-size: 2rem;
+  }
+
+  .game-section {
+    height: 55vh;
+  }
+
+  #bird {
+    width: 30px;
     height: 30px;
   }
 
   .pipe {
-    width: 50px; /* Smaller pipes for mobile */
-  }
-
-  #score {
-    font-size: 20px; /* Smaller score text for mobile */
+    width: 60px;
   }
 
   .mobile-controls button {
-    padding: 20px 30px; /* Larger buttons for mobile */
-    font-size: 20px;
-  }
-  /* Fruits */
-
-  .fruit {
-    position: absolute;
-    background-size: cover;
-    z-index: 5;
-  }
-
-  .fruit.small {
-    width: 20px;
-    height: 20px;
-    background-image: url("small-fruit.png"); /* Add your small fruit image */
-  }
-
-  .fruit.large {
-    width: 30px;
-    height: 30px;
-    background-image: url("large-fruit.png"); /* Add your large fruit image */
-    animation: zoom 1.5s ease-in-out infinite; /* Add zoom animation */
-  }
-
-  /* Zoom animation for large fruits */
-  @keyframes zoom {
-    0%,
-    100% {
-      transform: scale(1); /* Normal size */
-    }
-    50% {
-      transform: scale(1.2); /* Slightly larger */
-    }
-  }
-  /* Mobile Controls */
-  .mobile-controls button {
-    padding: 15px 25px;
-    font-size: 18px;
-    background-color: #008cba; /* Blue background */
-    color: white;
-    border: none;
-    border-radius: 10px; /* Rounded corners */
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    flex: 1; /* Equal width for both buttons */
-    margin: 0 5px; /* Space between buttons */
-    user-select: none; /* Prevent text selection */
-  }
-
-  .mobile-controls button:hover {
-    background-color: #007b9e; /* Darker blue on hover */
+    padding: 25px 0;
+    font-size: 1.1rem;
   }
 }
